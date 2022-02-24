@@ -1,3 +1,10 @@
+let scorePc = 0;
+let scoreUser = 0;
+let result;
+let playerSelection;
+let computerSelection;
+
+
 function computerPlay() {
     let computerChoice;
     let options = ["rock", "paper", "scissors"];
@@ -66,7 +73,7 @@ function playRound(playerSelection, computerSelection) {
 
 */
 
-
+/*
 function game() {
     playerSelection = prompt("Choose an option", "").toLowerCase();
     computerSelection = computerPlay();
@@ -94,7 +101,7 @@ function game() {
     console.log(playRound(playerSelection, computerSelection));
     console.log(totalScore());
 }
-
+*/
 
 function totalScore() {
     if(result === "You Won!, Rock beats Scissors." || result === "You Won!, Paper beats Rock." || result === "You Won!, Scissors beats Paper.") {
@@ -116,9 +123,30 @@ function totalScore () {
         }
 }
 */
-let scorePc = 0;
-let scoreUser = 0;
-let result;
-let playerSelection;
-let computerSelection;
-game();
+
+
+
+
+const buttonSelection = document.querySelectorAll('.buttonSelection');
+buttonSelection.forEach(button => button.addEventListener('click', buttonChoice))
+
+let divResults = document.querySelector('#match-results');
+let divTotalScore = document.querySelector('#total-score');
+
+function buttonChoice(e) {
+        playerSelection = e.target.value;
+        computerSelection = computerPlay();
+        divResults.textContent = playRound(playerSelection, computerSelection);
+        divTotalScore.textContent = totalScore();
+        if(scoreUser === 5 ) {
+                divTotalScore.textContent = 'USER WON THE MATCH!';
+                buttonSelection.forEach(button => button.removeEventListener('click', buttonChoice));
+        } else if(scorePc === 5) {
+                divTotalScore.textContent = 'PC WON THE MATCH!';
+                buttonSelection.forEach(button => button.removeEventListener('click', buttonChoice));
+        }
+}
+
+
+
+// game();
